@@ -10,7 +10,9 @@ Password for 'https://1888@github.com': your_token
 
 ##2. 如果看执行某个git命令的debug信息.
 可以在git 命令前加下面的设置:
+```
 GIT_CURL_VERBOSE=1 GIT_TRACE=1 git xxx
 e.g., GIT_CURL_VERBOSE=1 GIT_TRACE=1 git push
+```
 
 
