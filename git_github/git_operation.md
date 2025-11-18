@@ -1,5 +1,38 @@
 # git operations
-## 1. remote: Invalid username or token. Password authentication is not supported for Git operations.
+## git push -- 将本地仓库的提交上传到远程仓库
+理解git push之前，介绍几个关键点：
+* 本地分支：你在自己电脑上工作的分支。
+* 远程仓库：托管在服务器（如 GitHub, GitLab, Gitee）上的仓库。
+* 远程分支：远程仓库上的分支，通常是 origin/<分支名> 的形式，这是你本地分支对应的“镜像”。
+* 上游分支：一个本地分支可以关联一个远程分支作为其“上游”。设置了上游后，可以直接使用 git push 而不需要指定参数。
+
+基本语法：
+> git push <远程仓库名> <本地分支名>:<远程分支名>
+
+常用示例：
+1. git push origin main
+   
+   将本地的 main 分支推送到远程 origin 的 main 分支
+
+2. git push origin bugfix-123:hotfix-123
+   
+   将本地的 bugfix-123 分支推送到远程 origin仓库的hotfix-123分支
+
+3. git push --set-upstream origin main
+   
+   将本地的main分支对应的上游分支设为远程仓库的main分支。可以通过git branch -vv 可以查看所有本地分支及其关联的上游分支
+   ```bash
+   cityday@ubuntu24:~/work/misc_note$ git branch -vv
+   main 6c47499 [origin/main] add ssh method for Invalid username or token
+   ```
+
+4. git push
+   
+   将本地分支推送到对应的上游分支。
+
+
+## error handling
+1. remote: Invalid username or token. Password authentication is not supported for Git operations.
 目前已不支援密码方式登陆。
 ### method1. 需要通过github网站生产token，再将token作为密码输入才行
 ```
