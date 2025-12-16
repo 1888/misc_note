@@ -15,4 +15,20 @@ export QT_IM_MODULE=ibus
 * 因为.profile是login的时候执行，用于设置环境变量 (如 JAVA_HOME, PATH, EDITOR)。这样所有程序（包括从图形界面启动的程序）都能访问到。如果放到.bashrc里，就只有新起的terminal里会有这个设置，图形界面中不会有。
 * .profile只在login的时候执行一次，修改.profile后，需要source .profile或者logout再login才会其作用。
 
-## 3. 
+## 3. 禁止snap自动升级firefox
+完全禁用/恢复 Snap 自动更新
+```bash
+sudo snap set system refresh.hold="2025-12-31T23:59:00Z"
+sudo snap unset system refresh.hold
+```
+
+只禁用/恢复 Firefox 的自动更新
+```bash
+sudo snap refresh --hold firefox
+sudo snap refresh --unhold firefox
+```
+
+查看状态“held”
+```bash
+snap list
+```
