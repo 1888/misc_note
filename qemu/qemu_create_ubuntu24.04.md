@@ -11,9 +11,10 @@
 * -boot d # 从光盘 (cdrom) 启动
 
 3. 启动已安装的虚拟机
-> qemu-system-x86_64 -m 4096 -smp 4 -cpu host -enable-kvm -drive file=ubuntu24.qcow2,if=virtio,format=qcow2 -netdev user,id=net0,hostfwd=tcp::2222-:22 -device virtio-net-pci,netdev=net0
+> qemu-system-x86_64 -monitor stdio -m 4096 -smp 4 -cpu host -enable-kvm -drive file=ubuntu24.qcow2,if=virtio,format=qcow2 -netdev user,id=net0,hostfwd=tcp::2222-:22 -device virtio-net-pci,netdev=net0
 
 其中各参数含义如下：
+* -monitor stdio # 将监控器输出到标准输入/输出（终端），它是一个交互式控制台，允许用户在虚拟机运行时执行管理命令，如查看状态、调整配置或执行快照操作
 * -m 4096 # 为虚拟机分配 4096MB（4GB）内存
 * -smp 4 # 配置 4 个 CPU 核心
 * -cpu host # 使用与宿主机相同的 CPU 特性，提升性能
