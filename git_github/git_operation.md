@@ -91,4 +91,7 @@ GIT_CURL_VERBOSE=1 GIT_TRACE=1 git xxx
 e.g., GIT_CURL_VERBOSE=1 GIT_TRACE=1 git push
 ```
 
+## 3. git status不转义中文
+git config --global core.quotepath false
+
 
