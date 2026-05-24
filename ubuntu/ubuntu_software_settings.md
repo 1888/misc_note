@@ -32,3 +32,5 @@ sudo snap refresh --unhold firefox
 ```bash
 snap list
 ```
+
+## 4. terminal中鼠标左键选中后，点击鼠标中键可以粘贴
