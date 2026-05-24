@@ -147,15 +147,18 @@ less -R serial.log
 ## uefi driver understanding
 | items | linux driver     | uefi driver      |
 | :---- | :----:           | -----:           |
-| 单元格 |  module          | Image            |
-| 单元格 |  device          | ControllerHandle |
-| 单元格 |  device driver   | ImageHandle      |
-| 单元格 |  file operation  | Protocol         |
-| 单元格 |  match           | supported        |
-| 单元格 |  probe           | start            |
-| 单元格 |  remove          | stop             |
+| 01 |  module          | Image            |
+| 02 |  device          | ControllerHandle |
+| 03 |  device driver   | ImageHandle      |
+| 04 |  file operation  | Protocol         |
+| 05 |  match           | supported        |
+| 06 |  probe           | start            |
+| 07 |  remove          | stop             |
 
-
+Handle 是 UEFI 中用于关联 Protocol 与设备的 128 位唯一标识符，Protocol 是功能接口结构体，必须依附在 Handle 上才能被访问
+## difference between uefi and pi
+![alt text](images/uefi_pi_diff.png)
+![alt text](images/uefi_pi_architect.png)
 ## PCD (Platform Configuration Database)
 a mechanism for managing firmware settings and features that can be configured statically at build time or dynamically at runtime, allowing for platform customization, feature toggling, and user configuration within the UEFI firmware.
 
