@@ -26,13 +26,23 @@ qemu-system-aarch64 \
  -serial chardev:char0
 
 ### arm pflash
+qemu-system-aarch64: cfi.pflash01 device '/machine/virt.flash0' requires 67108864 bytes, pflash0 block backend provides 2097152 bytes
+表明virt machine要求flash的大小为64MB，而实际的flash iamge大小为2MB。
+需要做一些处理：
+1. create a 64MB file filled with zeros
+dd if=/dev/zero of=QEMU_EFI.img bs=1M count=64
+dd if=/dev/zero of=QEMU_VARS.img bs=1M count=64
+2. copy your original 2MB firmware image to the beginning of the new file
+dd if=/home/cityday/work/qemu/1888_qemu/qemu-study/arm-uefi/QEMU_EFI.fd of=QEMU_EFI.img conv=notrunc
+dd if=/home/cityday/work/qemu/1888_qemu/qemu-study/arm-uefi/QEMU_VARS.fd of=QEMU_VARS.img conv=notrunc
+3. 使用QEMU_EFI.img和QEMU_VARS.img启动QEMU
 qemu-system-aarch64 \
  -m 4096 \
  -cpu cortex-a72 \
  -smp 4 \
  -M virt \
- -drive if=pflash,format=raw,unit=0,readonly=on,file=/home/cityday/work/qemu/1888_qemu/qemu-study/arm-uefi/QEMU_EFI.fd \
- -drive if=pflash,format=raw,unit=1,file=/home/cityday/work/qemu/1888_qemu/qemu-study/arm-uefi/QEMU_VARS.fd \
+ -drive if=pflash,format=raw,unit=0,readonly=on,file=/home/cityday/work/qemu/1888_qemu/qemu-study/arm-uefi/QEMU_EFI.img \
+ -drive if=pflash,format=raw,unit=1,file=/home/cityday/work/qemu/1888_qemu/qemu-study/arm-uefi/QEMU_VARS.img \
  -chardev stdio,id=char0,logfile=./serial.log,signal=off \
  -serial chardev:char0
 
